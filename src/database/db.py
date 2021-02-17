@@ -3,6 +3,7 @@ import click
 
 from flask import current_app, g
 from flask.cli import with_appcontext
+from . import embeddedsql
 
 def close_db(e=None):
     """! Closes the database when disposing
@@ -34,10 +35,9 @@ def init_app(app):
 def init_db():
     """! Initializes the database on first run
     """
-    db = get_db();
+    db = get_db()
 
-    with current_app.open_resource('database/schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))
+    db.executescript(embeddedsql.Reader().schema)
 
 @click.command('init-db')
 @with_appcontext

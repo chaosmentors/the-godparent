@@ -3,6 +3,7 @@ import os
 
 from flask import Flask
 from .database import db
+from .blueprints import auth
 
 # Functions
 def create_app(test_config=None):
@@ -39,5 +40,6 @@ def create_app(test_config=None):
         return 'Hello, World'
 
     db.init_app(app)
+    app.register_blueprint(auth.bp)
 
     return app
