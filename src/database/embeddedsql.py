@@ -1,13 +1,14 @@
 # Description: Defines a class, that will return the sql code inside the
 #              resource, that has the same name as the property.
 # Created On: Wed 17 Feb 2021 08:37:40 PM CET
-# Last Modified: Wed 03 Mar 2021 08:30:33 PM CET
+# Last Modified: Wed 10 Mar 2021 09:39:33 PM CET
 
 import sys
 from flask import current_app
 
+
 # Defines an SQL reader that will read sql commands from a resource.
-# This makes sure python and SQL code stay separated. 
+# This makes sure python and SQL code stay separated.
 class Reader():
     def __init__(self, namespace='database/sql'):
         """! Creates a new Reader
@@ -15,14 +16,13 @@ class Reader():
         """
         self._namespace = namespace
 
-    def __getCallerName(self):
+    def __get_caller_name(self):
         """! Retruns the name of the calling function
         @return Name of the caller.
         """
         return sys._getframe(1).f_code.co_name
 
-
-    def __getResource(self,name):
+    def __get_resource(self, name):
         """! Returns a resource
         @param name Name of the sql resource to find.
 
@@ -35,30 +35,29 @@ class Reader():
     def createAccount(self):
         """! Retruns the SQL that creates a new account
         """
-        return self.__getResource(self.__getCallerName())
+        return self.__get_resource(self.__get_caller_name())
 
     @property
     def getUserByEmail(self):
         """! Retruns the sql code for getting the user record by its email
         address.
         """
-        return self.__getResource(self.__getCallerName())
+        return self.__get_resource(self.__get_caller_name())
 
     @property
     def getUserById(self):
-    """! Returns the sql code for getting the user record by its id.
-    """
-    return self.__getResource(self.__getCallerName())
+        """! Returns the sql code for getting the user record by its id.
+        """
+        return self.__get_resource(self.__get_caller_name())
 
     @property
     def getUserId(self):
         """! Retruns the sql code for getting the user id by email.
         """
-        return self.__getResource(self.__getCallerName())
+        return self.__get_resource(self.__get_caller_name())
 
     @property
     def schema(self):
         """! Retruns the schema.sql code
         """
-        return self.__getResource(self.__getCallerName())
-
+        return self.__get_resource(self.__get_caller_name())

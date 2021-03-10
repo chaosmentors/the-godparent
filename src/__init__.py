@@ -5,6 +5,7 @@ from flask import Flask
 from .database import db
 from .blueprints import auth
 
+
 # Functions
 def create_app(test_config=None):
     """! Creates a new instance of the godparent app.
@@ -16,10 +17,9 @@ def create_app(test_config=None):
 
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(
-            SECRET_KEY='debug',
-            DATABASE=os.path.join(app.instance_path, 'godparent.db')
-    )
+    app.config.from_mapping(SECRET_KEY='debug',
+                            DATABASE=os.path.join(app.instance_path,
+                                                  'godparent.db'))
 
     if test_config is None:
         # load the instance config, if it exists
