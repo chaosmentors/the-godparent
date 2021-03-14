@@ -1,7 +1,7 @@
 """!
 Project: the-godmother
 Created On: Wed 17 Feb 2021 07:58:06 PM CET
-Last Modified: Sun 14 Mar 2021 04:05:07 PM CET
+Last Modified: Sun 14 Mar 2021 06:35:04 PM CET
 """
 import functools
 
@@ -25,7 +25,7 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = db.get_db().execute(
-            sql.getUserById().format(user_id)).fetchone()
+            sql.getUserById.format(user_id)).fetchone()
 
 
 @bp.route('/login', methods=('GET', 'POST'))

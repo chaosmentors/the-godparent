@@ -1,0 +1,5 @@
+#!/bin/sh
+# Shortcut to setup the flask environment and run the developer instance
+# Created On: Sun 14 Mar 2021 04:48:09 PM CET
+# Last Modified On: Sun 14 Mar 2021 04:48:09 PM CET
+FLASK_APP="src/" FLASK_ENV=development flask run

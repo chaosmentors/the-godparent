@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Welcome{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% if g.user %}
+        <h2>Welcome</h2>
+    {% else %}
+        <div>
+            Please <a class="action" href="{{ url_for('auth.login') }}">log
+                in</a> or <a class="action" href="{{ url_for('auth.register')
+                                                  }}">register</a>
+    {% endif %}
+{% endblock %}
