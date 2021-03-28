@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}Welcome{% endblock %}</h1>
+<h1>{% block title %}{% trans %}Welcome{% endtrans %}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
     {% if g.user %}
-        <h2>Welcome</h2>
+    <h2>{% trans %}Welcome{% endtrans %}</h2>
     {% else %}
         <div>
             Please <a class="action" href="{{ url_for('auth.login') }}">log

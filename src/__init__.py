@@ -1,7 +1,8 @@
 # Imports
 import os
 
-from flask import Flask
+from flask import (Flask, g, request)
+from flask_babel import Babel
 from .database import db
 from .blueprints import (auth, main)
 
@@ -20,6 +21,7 @@ def create_app(test_config=None):
     app.config.from_mapping(SECRET_KEY='debug',
                             DATABASE=os.path.join(app.instance_path,
                                                   'godparent.db'))
+    babel = Babel(app)
 
     if test_config is None:
         # load the instance config, if it exists
@@ -40,3 +42,27 @@ def create_app(test_config=None):
     app.add_url_rule('/', endpoint='index')
 
     return app
+
+    @babel.localeselector
+    def get_locale():
+        """! Chooses the locale to set for a user
+        @return The selected locale
+        """
+        # if a user is logged in, use the locale from the user settings.
+        user = getattr(g, 'user', None)
+        if user is not None:
+            return user.locale
+        # otherwise try to guess the language from the user accept
+        # header the browser transmits.
+        return request.accept_languages.best_match(['de', 'en'])
+
+    @babel.timezoneselector
+    def get_timezone():
+        """! Chooses the time zone based on the user's settings.
+        @return The selected timezone.
+        """
+        user = getattr(g, 'user', None)
+        if (user is not None):
+            return user.timezone
+
+        return None
