@@ -1,7 +1,7 @@
 # Description: Defines a class, that will return the sql code inside the
 #              resource, that has the same name as the property.
 # Created On: Wed 17 Feb 2021 08:37:40 PM CET
-# Last Modified: Wed 10 Mar 2021 09:39:33 PM CET
+# Last Modified: Mon 05 Apr 2021 05:07:14 PM CEST
 
 import sys
 from flask import current_app
@@ -34,6 +34,12 @@ class Reader():
     @property
     def createAccount(self):
         """! Retruns the SQL that creates a new account
+        """
+        return self.__get_resource(self.__get_caller_name())
+
+    @property
+    def getTagByPerson(self):
+        """! Return the SQL that returns a list of tags for a specific user
         """
         return self.__get_resource(self.__get_caller_name())
 

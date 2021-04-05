@@ -1,6 +1,6 @@
 -- Returns a person, identified by their row id
 -- Created On: Sun 14 Mar 2021 06:34:14 PM CET
--- Last Modified: Sun 14 Mar 2021 06:34:30 PM CET
+-- Last Modified: Mon 05 Apr 2021 03:35:12 PM CEST
 
 SELECT
      [rowid] AS [id]
@@ -14,7 +14,7 @@ SELECT
     ,[random_id]
     ,[role]
 FROM
-    [Person]
+    [Person] 
 WHERE
     [rowid] = {}
 

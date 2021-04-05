@@ -1,16 +1,57 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}{% trans %}Welcome{% endtrans %}{% endblock %}</h1>
+<h1>{% block title %}{% trans %}Welcome at the Chaos-Mentors{% endtrans %}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
     {% if g.user %}
-    <h2>{% trans %}Welcome{% endtrans %}</h2>
     {% else %}
-        <div>
-            Please <a class="action" href="{{ url_for('auth.login') }}">log
-                in</a> or <a class="action" href="{{ url_for('auth.register')
-                                                  }}">register</a>
+    <h2>{% trans %} Who are the Chaos-Mentors for? {% endtrans %}</h2>
+    <div>
+        <p>
+        {% trans %}
+            You've always wanted to visit the Chaos Communication Congress, and
+            you're interested in topics such as privacy, computer security,
+            hardware hacking or network policies? But you don't have any
+            connection into the community yet? Perhaps, you've already attended
+            a chaos event, but you feel like you're "not really a hacker" or
+            that you do not fit in just right? Are you a non-male hacker, or a
+            member of any under-represented group and unsure, if you'll feel
+            comfortable? Or do you have specific needs, that will make
+            participation a challenge for you?
+        {% endtrans %}
+        </p> 
+        
+        <p>
+        {% trans %}
+            We would like to welcome you to Congress and make it easier for you
+            to get settled!
+        {% endtrans %}
+        </p>
+        <p>
+        {% trans %}
+            Feel welcome at the Chaos Communication Congress with the Chaos
+            Mentors!
+        {% endtrans %}
+        <br />
+        {% trans %}
+            You have come to the right place and we would like to help you, to
+            have an exciting and beautiful stay. As a "mentee", you will be
+            introduced to a mentor, who is a seasoned congress visitor. Mentors
+            and mentees will be assigned to a group, based on the interests you
+            tell us about. Before Congress, the godparents will be available for
+            your questions, will welcome you and on the first day of congress,
+            they will explore congress with you and help you select the most
+            interesting talks and workshops. During Congress, the
+            Chaos-Mentors-Assembly will be available to you, as a base from
+            where you can venture out and explore. 
+        {% endtrans %}
+        </p>
+    </div>
+    <div>
+        Please <a class="action" href="{{ url_for('auth.login') }}">log
+            in</a> or <a class="action" href="{{ url_for('auth.register')
+                                              }}">register</a>
     {% endif %}
 {% endblock %}
