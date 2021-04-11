@@ -1,3 +1,0 @@
-#!/bin/sh
-pybabel extract -F src/babel.cfg -k lazy_gettext -o src/messages.pot src
-pybabel update -i src/messages.pot -d src/translations
