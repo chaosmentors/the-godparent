@@ -1,7 +1,7 @@
 # Description: Defines a class, that will return the sql code inside the
 #              resource, that has the same name as the property.
 # Created On: Wed 17 Feb 2021 08:37:40 PM CET
-# Last Modified: Sun 11 Apr 2021 06:28:36 PM CEST
+# Last Modified: Thu 22 Apr 2021 08:17:28 PM CEST
 
 import sys
 from flask import current_app
@@ -29,40 +29,3 @@ class Reader():
         """
         with current_app.open_resource(f"{self._namespace}/{name}.sql") as f:
             return f.read().decode('utf8')
-
-    @property
-    def createAccount(self):
-        """! Retruns the SQL that creates a new account
-        """
-        return self.__get_resource(self.__get_caller_name())
-
-    @property
-    def getTagByPerson(self):
-        """! Return the SQL that returns a list of tags for a specific user
-        """
-        return self.__get_resource(self.__get_caller_name())
-
-    @property
-    def getUserByEmail(self):
-        """! Retruns the sql code for getting the user record by its email
-        address.
-        """
-        return self.__get_resource(self.__get_caller_name())
-
-    @property
-    def getUserById(self):
-        """! Returns the sql code for getting the user record by its id.
-        """
-        return self.__get_resource(self.__get_caller_name())
-
-    @property
-    def getUserId(self):
-        """! Retruns the sql code for getting the user id by email.
-        """
-        return self.__get_resource(self.__get_caller_name())
-
-    @property
-    def schema(self):
-        """! Retruns the schema.sql code
-        """
-        return self.__get_resource(self.__get_caller_name())
