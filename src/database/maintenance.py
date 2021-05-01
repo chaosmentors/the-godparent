@@ -1,10 +1,15 @@
-import click
+"""Performs updates on the database
+
+This module provides the DatabaseUpdater class, that can be used to provide
+updates to the database.
+"""
 import os
 import re
+import click
 from flask import current_app
 
 
-class DatabaseUpdater:
+class DatabaseUpdater:  # pylint: disable=too-few-public-methods
     """Runs an automatic update on the database, when the init command is
        run.
     """
@@ -28,8 +33,10 @@ class DatabaseUpdater:
         last_version -- Version string of the last version that was
                         successfully executed.
         """
-        file_list = [fn for fn in os.listdir(self._path)
-                     if re.match(r'\d{4}-\d{3}-\d{2}-.*.sql', fn)]
+        file_list = [
+            fn for fn in os.listdir(self._path)
+            if re.match(r'\d{4}-\d{3}-\d{2}-.*.sql', fn)
+        ]
         return sorted(fn for fn in file_list if fn[0:11] > last_version)
 
     def __get_version(self):
@@ -41,7 +48,8 @@ class DatabaseUpdater:
                 return '0000-00-00.0'
             return version['last_version']
 
-    def __print_script_info(self, script):
+    @staticmethod
+    def __print_script_info(script):
         """Walks through the text of a script, and prints out the line that
             begins with -- INFO:
         """
@@ -81,8 +89,8 @@ class DatabaseUpdater:
 
         # Now get all updateable elements and run them.
         file_list = self.__get_update_scripts(self.__get_version())
-        for f in file_list:
-            self.__run_sql(f[:-4])
+        for fn in file_list:
+            self.__run_sql(fn[:-4])
 
         if file_list:
             self.__set_version(file_list[-1][0:11])
