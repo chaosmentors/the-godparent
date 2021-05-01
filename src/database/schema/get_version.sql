@@ -1,7 +1,7 @@
 -- Returns the currently saved version string from the database
 
 SELECT
-    [latest_version]
+    [last_version]
 FROM
     [version]
 WHERE

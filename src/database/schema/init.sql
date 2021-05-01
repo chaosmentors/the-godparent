@@ -13,7 +13,7 @@ INSERT INTO
 )
 SELECT
      0
-    ,'0000-00-00.0'
+    ,'0000-000-00'
 WHERE NOT EXISTS (
     SELECT 1
     FROM

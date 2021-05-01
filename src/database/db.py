@@ -1,6 +1,6 @@
 import sqlite3
 import click
-import re
+import os
 from flask import current_app, g
 from flask.cli import with_appcontext
 
@@ -8,17 +8,16 @@ from . import maintenance
 
 
 def close_db(e=None):
-    """! Closes an existing database connection, if it's open.
-    """
+    """Closes an existing database connection, if it's open."""
     db = g.pop('db', None)
 
     if (db is not None):
         db.close()
 
 
-def get_db():
-    """! Returns an instance of the current database connection or 
-         opens a new one.
+def get_db() -> sqlite3.Connection:
+    """Returns an instance of the current database connection or
+       opens a new one.
     """
     if 'db' not in g:
         g.db = sqlite3.connect(current_app.config['DATABASE'],
@@ -31,10 +30,14 @@ def get_db():
 def init_db():
     """! Initialize the database, when the flask init command is called.
     """
-    db = get_db()
+    db_updater = maintenance.DatabaseUpdater(get_db(), '{}/database/schema'
+                                             .format(os.path.dirname(
+                                                 os.path.dirname(
+                                                     os.path.abspath(__file__))
+                                                 )))
 
     # initialize the database
-    maintenance.run_sql(db, 'database/schema/init.sql')
+    db_updater.update()
 
 
 @click.command('init-db')
