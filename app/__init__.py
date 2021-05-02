@@ -8,7 +8,8 @@ participants of the chaos mentors program.
 import os
 
 from flask import Flask
-from .database import db
+from app.database import db
+from app.blueprints import index
 
 
 # functions
@@ -35,10 +36,8 @@ def create_app(test_config=None) -> Flask:
     except OSError:
         pass
 
-    # for starters, just say hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
+    app.register_blueprint(index.bp)
+    app.add_url_rule('/', endpoint='index')
 
     db.init_app(app)
 
