@@ -8,6 +8,7 @@ participants of the chaos mentors program.
 import os
 
 from flask import Flask
+from app.config import (Config, load_config)
 from app.database import db
 from app.blueprints import index
 
@@ -20,7 +21,8 @@ def create_app(test_config=None) -> Flask:
     test_config -- The configuration data for testing the app
     """
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(SECRET_KEY='debug',
+    config = load_config(os.path.join(app.instance_path, 'config.json'))
+    app.config.from_mapping(SECRET_KEY=config.SECRET_KEY,
                             DATABASE=os.path.join(app.instance_path,
                                                   'godparent.db'))
     if test_config is None:
