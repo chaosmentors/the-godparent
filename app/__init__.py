@@ -10,7 +10,7 @@ import os
 from flask import Flask
 from app.config import (Config, load_config)
 from app.database import db
-from app.blueprints import index
+from app.blueprints import (index, auth)
 
 
 # functions
@@ -22,12 +22,10 @@ def create_app(test_config=None) -> Flask:
     """
     app = Flask(__name__, instance_relative_config=True)
     config = load_config(os.path.join(app.instance_path, 'config.json'))
-    app.config.from_mapping(SECRET_KEY=config.SECRET_KEY,
-                            DATABASE=os.path.join(app.instance_path,
-                                                  'godparent.db'))
+
     if test_config is None:
         # load the instance config if it exists
-        app.config.from_pyfile('config.py', silent=True)
+        app.config.from_object(config)
     else:
         # load the test config, if passed in
         app.config.from_pyfile(test_config)
@@ -39,6 +37,7 @@ def create_app(test_config=None) -> Flask:
         pass
 
     app.register_blueprint(index.bp)
+    app.register_blueprint(auth.bp)
     app.add_url_rule('/', endpoint='index')
 
     db.init_app(app)

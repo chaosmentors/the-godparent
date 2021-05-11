@@ -77,8 +77,7 @@ class DatabaseUpdater:  # pylint: disable=too-few-public-methods
         """
         with current_app.open_resource("{}/set_version.sql".format(
                 self._path)) as f:
-            self._db.execute(
-                f.read().decode('utf8').format(last_version=version_string))
+            self._db.execute(f.read().decode('utf8'), [version_string])
 
     def update(self):
         """Checks for new update scripts, and then runs an update on

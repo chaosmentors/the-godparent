@@ -3,6 +3,6 @@
 UPDATE
     [version]
 SET
-    [last_version] = '{last_version}'
+    [last_version] = ? 
 WHERE
     [id] = 0
