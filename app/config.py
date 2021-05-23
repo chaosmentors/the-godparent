@@ -1,20 +1,16 @@
 """Configuration parameter for the app."""
-import json
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    """Stores configuration data from a json object"""
-    def __init__(self, dict):
-        vars(self).update(dict)
+    """Stores the configuration data """
 
+    SECRET_KEY = os.environ.get('SECRET_KEY') or \
+        'abe826f5-70a8-4dc0-9dfe-ab8d10c37c85'
 
-def load_config(fname) -> Config:
-    """Loads the configuration from a json file
-    fname -- Name of the configuration file.
-    Returns a configuration object.
-    """
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI') or \
+        'sqlite:///' + os.path.join(basedir, '../instance/godparent.db')
 
-    with open(fname, 'r') as config_file:
-        data = config_file.read()
-
-    return json.loads(data, object_hook=Config)
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

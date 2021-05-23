@@ -2,4 +2,4 @@
 # Shortcut to setup the flask environment and init the database
 # Created On: Sun 14 Mar 2021 04:48:09 PM CET
 # Last Modified On: Sun 14 Mar 2021 04:48:09 PM CET
-FLASK_APP="app/" FLASK_ENV=development flask db init
+FLASK_APP="app/" FLASK_ENV=development flask db upgrade

@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 
 {% block header %}
-<h1>{% block title %}Welcome{% endblock %}</h1>
+<h1>
+    {% block title %}
+    {% if current_user.is_anonymous %}
+    Welcome
+    {% else %}
+    Welcome {{ current_user.nickname }}
+    {% endif %}
+    {% endblock %}
+</h1>
 {% endblock %}
 
 {% block content %}
@@ -14,4 +22,18 @@
         </header>
         <p class="body"> This is a stub post. Will be replaced by actual data.</p>
     </article>
+    {% if current_user.is_anonymous %}
+    <div>
+        <div class="inline" id="register_button">
+            <a href="{{ url_for('auth.register', role='mentee') }}">
+                <button>Register as a Mentee </button>
+            </a>
+        </div>
+        <div class="inline" id="register_button">
+            <a href="{{ url_for('auth.register', role='mentor') }}">
+                <button>Register as a Mentor</button>
+            </a>
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}

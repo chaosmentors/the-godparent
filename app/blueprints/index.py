@@ -4,7 +4,6 @@ This will get the user to the public start page, or their personal overview.
 
 from flask import (Blueprint, flash, g, redirect, render_template, url_for)
 from werkzeug.exceptions import abort
-from app.database.db import get_db
 
 bp = Blueprint('index', __name__)
 
