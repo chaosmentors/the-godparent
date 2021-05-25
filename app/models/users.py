@@ -10,7 +10,10 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(127), index=True, unique=True, nullable=False)
     id = db.Column(db.Integer, primary_key=True)
     is_godmother = db.Column(db.Boolean, nullable=False, default=0)
-    nickname = db.Column(db.String(255), index=True)
+    nickname = db.Column(db.String(255),
+                         index=True,
+                         unique=True,
+                         nullable=False)
     password_hash = db.Column(db.String(128))
     pronoun = db.Column(db.String(50))
     role = db.Column(db.Integer, nullable=False, default=0)

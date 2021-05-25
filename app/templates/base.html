@@ -8,7 +8,8 @@
         {% if current_user.is_anonymous %}
         <li><span><a href="{{ url_for('auth.login') }}">Sign In</a></span></li>
         {% else %}
-        <li><span><a href="{{ url_for('index') }}">{{ current_user.nickname }}'s Profile </a></span></li>
+        <li><span><a href="{{ url_for('profile.user',
+                    nickname=current_user.nickname) }}">{{ current_user.nickname }}'s Profile </a></span></li>
         <li><span><a href="{{ url_for('auth.logout') }}">Sign Off</a></span></li>
         {% endif %}
     </ul>

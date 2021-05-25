@@ -1,6 +1,6 @@
 """Defines a registration form for new users to register
    Created On: Sun 23 May 2021 11:21:10 PM CEST
-   Last Modified: Sun 23 May 2021 11:22:03 PM CEST
+   Last Modified: Mon 24 May 2021 02:02:51 PM CEST
 """
 
 from flask_wtf import FlaskForm
@@ -22,3 +22,8 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('This e-mail address is already in use.')
+
+    def validate_nickname(self, nickname):
+        user = User.query.filter_by(nickname=nickname.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different nick name.')
