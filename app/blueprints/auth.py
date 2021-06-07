@@ -1,6 +1,6 @@
 """Defines the routes for login an registration
    Created On: Tue 11 May 2021 09:51:00 PM CEST
-   Last Modified: Mon 24 May 2021 12:13:53 AM CEST
+   Last Modified: Mon 07 Jun 2021 10:03:18 PM CEST
 """
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
@@ -28,7 +28,7 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
+            next_page = url_for('profile.user', nickname=user.nickname)
         return redirect(next_page)
 
     return render_template('login.html', title='Sign In', form=form)

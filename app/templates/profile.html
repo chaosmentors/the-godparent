@@ -4,6 +4,23 @@
     <h1>Profile {{ user.nickname }}</h1>
     <hr/>
     <p>
+        <h2>My pronoun</h2>
+        {% if user.pronoun == None %}
+        They/Her/Him
+        {% else %}
+        {{ user.pronoun }}
+        {% endif %}
+    </p>
+    <p>
+        <h2>About me</h2>
         {{ user.description }}
     </p>
+    {% if user.nickname == current_user.nickname %}
+    <div>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>{{ form.submit() }}</p>
+        </form>
+    </div>
+    {% endif %}
 {% endblock %}

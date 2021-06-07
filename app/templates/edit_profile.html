@@ -12,8 +12,27 @@
             {% endfor %}
         </p>
         <p>
+            {{ form.pronoun.label }} <br/>
+            {{ form.pronoun(size=32) }} <br/>   
+        </p>
+        <p>
             {{ form.description.label }} <br/>
-            {{ form.description(cols=50, rows=4) }} <br/>
+            {{ form.description(cols=50, rows=4) }} <br/>            
+        </p>
+        <h2>Change password</h2>
+        <p>
+            {{ form.password.label }} <br/>
+            {{ form.password(size=32) }} <br/>            
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.repeat_password.label }} <br/>
+            {{ form.repeat_password(size=32) }} <br/>
+            {% for error in form.repeat_password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
     </form>
