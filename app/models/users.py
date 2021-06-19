@@ -23,7 +23,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     pronoun = db.Column(db.String(50))
     role = db.Column(db.Integer, nullable=False, default=0)
-    tags = db.relationship('Tag', secondary='user_tags', backref='user')
+    tags = db.relationship('Tag', secondary=user_tags, backref='user')
 
     def __repr__(self):
         return '<User {}>'.format(self.nickname)
@@ -33,6 +33,22 @@ class User(UserMixin, db.Model):
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
+
+    def get_tags(self):
+        """Returns a comma separated list of tags for this user."""
+        tag_list = [t.value for t in self.tags]
+        return ','.join(tag_list)
+
+    def set_tags(self, tag_field):
+        """Splits a comma separated list of tags into its elements and adds them
+        to the tag list.
+        """
+        tag_list = tag_field.split(',')
+        self.tags.clear()
+        for t in tag_list:
+            new_tag = Tag()
+            new_tag.value = t
+            self.tags.append(new_tag)
 
 
 @login.user_loader
