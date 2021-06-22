@@ -43,8 +43,8 @@ class User(UserMixin, db.Model):
         return ','.join(tag_list)
 
     def set_tags(self, tag_field):
-        """Splits a comma separated list of tags into its elements and adds them
-        to the tag list.
+        """Splits a comma separated list of tags into its elements and adds
+        them to the tag list.
         """
         tag_list = tag_field.split(',')
         self.tags.clear()
