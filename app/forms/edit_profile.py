@@ -1,6 +1,6 @@
 """ Defines a form, that allows a user to edit their profile.
     Created On: Mon 24 May 2021 02:34:06 PM CEST
-    Last Modified: Mon 07 Jun 2021 10:06:11 PM CEST
+    Last Modified: Tue 22 Jun 2021 06:59:19 PM CEST
 """
 
 from flask_wtf import FlaskForm
@@ -17,6 +17,7 @@ class EditProfileForm(FlaskForm):
     repeat_password = PasswordField('Repeat New Password',
                                     validators=[EqualTo('password')])
     submit = SubmitField('Save')
+    tags = StringField('Tags', validators=None)
 
 
 class EditButtonForm(FlaskForm):

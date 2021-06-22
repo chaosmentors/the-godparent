@@ -23,7 +23,10 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     pronoun = db.Column(db.String(50))
     role = db.Column(db.Integer, nullable=False, default=0)
-    tags = db.relationship('Tag', secondary=user_tags, backref='user')
+    tags = db.relationship('Tag',
+                           secondary=user_tags,
+                           backref='user',
+                           cascade='all')
 
     def __repr__(self):
         return '<User {}>'.format(self.nickname)
@@ -46,8 +49,10 @@ class User(UserMixin, db.Model):
         tag_list = tag_field.split(',')
         self.tags.clear()
         for t in tag_list:
-            new_tag = Tag()
-            new_tag.value = t
+            new_tag = Tag.query.filter_by(value=t).first()
+            if not new_tag:
+                new_tag = Tag()
+                new_tag.value = t.strip()
             self.tags.append(new_tag)
 
 

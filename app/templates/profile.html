@@ -15,6 +15,10 @@
         <h2>About me</h2>
         {{ user.description }}
     </p>
+    <p>
+        <h2>Tags</h2>
+        {{ user.get_tags() }}
+    </p>
     {% if user.nickname == current_user.nickname %}
     <div>
         <form action="" method="post">
