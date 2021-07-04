@@ -1,6 +1,6 @@
 """Defines the routes for profile information
    Created On: Mon 24 May 2021 12:55:44 PM CEST
-   Last Modified: Tue 22 Jun 2021 07:33:23 PM CEST
+   Last Modified: Sun 04 Jul 2021 01:53:28 PM CEST
 """
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
@@ -33,7 +33,7 @@ def edit_profile():
         current_user.pronoun = form.pronoun.data
         current_user.description = form.description.data
         current_user.set_tags(form.tags.data)
-        if form.password.data is not None:
+        if form.password.data:
             current_user.set_password(form.password.data)
         db.session.commit()
         flash('Your changes have been saved.')
