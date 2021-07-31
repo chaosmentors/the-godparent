@@ -24,7 +24,7 @@ login.login_view = 'auth.login'
 # and are thus postponed to here. This is, I kid you not, the official
 # solution flask uses to allow blueprints and SQLAlchemy at the
 # same time
-from app.blueprints import index, auth, profile
+from app.blueprints import index, auth, language, profile
 from app.models import users
 from app.models import posts
 
@@ -37,4 +37,5 @@ except OSError:
 app.register_blueprint(index.bp)
 app.register_blueprint(auth.bp)
 app.register_blueprint(profile.bp)
+app.register_blueprint(language.bp)
 app.add_url_rule('/', endpoint='index')
