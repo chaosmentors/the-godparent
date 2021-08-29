@@ -26,7 +26,6 @@ login.login_view = 'auth.login'
 # same time
 from app.blueprints import index, auth, language, profile
 from app.models import users
-from app.models import posts
 
 # ensure the instance folder exists
 try:
