@@ -1,6 +1,6 @@
 """Defines the routes for adding and editing the supported languages.
    Created On: Sat 24 Jul 2021 09:01:05 PM CEST
-   Last Modified: Sun 01 Aug 2021 01:00:43 AM CEST
+   Last Modified: Thu 23 Sep 2021 08:37:19 PM CEST
 """
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
@@ -8,6 +8,7 @@ from flask_login import current_user, login_required
 from app import db
 from app.forms.language import EditLanguageForm, ListLanguages
 from app.models.languages import Language
+from app.sidebar import generate_page_list
 
 bp = Blueprint('language', __name__)
 
@@ -101,10 +102,14 @@ def list():
     if not current_user.is_godmother:
         flash('Only godparents can use this function.')
         return redirect(url_for('index'))
-    results = Language.query.order_by(Language.iso_code).all()
+    results = Language.query.order_by(Language.iso_code)
 
     if not results:
         redirect(url_for('language.add'))
     else:
         table = ListLanguages(results)
-        return render_template('languages.html', table=table)
+        pages = generate_page_list()
+        return render_template('languages.html',
+                               table=table,
+                               pages=pages,
+                               page_name='Languages')

@@ -8,7 +8,10 @@ nav h1 { flex: auto; margin: 0; }
 nav h1 a { text-decoration: none; padding: 0.25rem 0.5rem; }
 nav ul  { display: flex; list-style: none; margin: 0; padding: 0; }
 nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
-.content { padding: 0 1rem 1rem; }
+.content { 
+    padding: 0 1rem 1rem; 
+    margin-left: 160px;
+}
 .content > header { border-bottom: 1px solid lightgray; display: flex; align-items: flex-end; }
 .content > header h1 { flex: auto; margin: 1rem 0 0.25rem 0; }
 .flash { margin: 1em 0; padding: 1em; background: #cae6f6; border: 1px solid #377ba8; }
@@ -25,3 +28,28 @@ nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
 input.danger { color: #cc2f2e; }
 input[type=submit] { align-self: start; min-width: 10em; }
 .inline { display:inline-block; margin-right:5px }
+
+/* The sidebar menu */
+.sidenav {
+    height: auto; /* Set to 100% for full page height */ 
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed sidebar (stay in place on scroll) */
+    z-index: 1; /* always stay on top */
+    background-color: lightgray;
+    overflow-x: hidden /* disable horizontal scrolling */
+    padding-top: 20px;
+    margin-top: 25px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 6px, 8px, 6px, 16px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #3B7BA8;
+    display: block;
+}
+
+/* when user mouses over the navigation links, change their colour */
+.sidenav a:hover { color: #1e3e54; }
+.sidenav ul { list-style: none; }

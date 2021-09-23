@@ -1,0 +1,19 @@
+<!--
+    Description: Use these jinja macros to enable extra functions without having to use
+                 javaScript. 
+    Created On: Sun 29 Aug 2021 01:06:01 PM CEST
+    Last Modified: Thu 23 Sep 2021 08:52:00 PM CEST
+-->
+
+<!-- Create a side bar with links to the pages from a list. -->
+{% macro build_site_navigation(pages, selected) %}
+<div class="sidenav">
+    <ul>
+        {% for page in pages %}
+        <a href="{{page.url}}">
+            <li class="text-lg pl-6 py-3 {% if selected == page.name %}border-l-4 bg-gray-200{% endif %}">{{ page.name }}</li>
+        </a>
+        {% endfor %}
+    </ul>
+</div>
+{% endmacro %}
