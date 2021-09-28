@@ -2,9 +2,8 @@
 <title>{% block title %}{% endblock %} - The Godparent</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 <nav>
-    <h1>The Godparent</h1>
+    <h1><a href="{{ url_for('index') }}">The Godparent</a></h1>
     <ul>
-        <li><span><a href="{{ url_for('index') }}">Home</a></span></li>
         {% if current_user.is_anonymous %}
         <li><span><a href="{{ url_for('auth.login') }}">Sign In</a></span></li>
         {% else %}
