@@ -8,7 +8,7 @@ class Static(db.Model):
     description = db.Column(db.Text)
     id = db.Column(db.Integer, primary_key=True)
     language_id = db.Column(db.Integer, db.ForeignKey('language.id'))
-    language = db.relationship('Language', backref='language',               uselist=False)
+    language = db.relationship('Language', backref='language', uselist=False)
     type = db.Column(db.Integer)
 
     def __repr__(self):
