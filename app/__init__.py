@@ -25,7 +25,7 @@ login.login_view = 'auth.login'
 # solution flask uses to allow blueprints and SQLAlchemy at the
 # same time
 from app.blueprints import index, auth, language, profile
-from app.models import users
+from app.models import users, pages
 
 # ensure the instance folder exists
 try:
