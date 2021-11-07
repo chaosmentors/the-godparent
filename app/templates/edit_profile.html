@@ -10,7 +10,7 @@
             {% for error in form.nickname.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
+        </p>    
         <p>
             {{ form.pronoun.label }} <br/>
             {{ form.pronoun(size=32) }} <br/>   
