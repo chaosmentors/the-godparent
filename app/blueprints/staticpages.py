@@ -1,18 +1,18 @@
 """Defines the routes for static page editing.
    Created On: Sun 07 Nov 2021 03:31:00 PM CET
-   Last Modified: Sun 07 Nov 2021 03:55:03 PM CET
+   Last Modified: Sun 06 Feb 2022 08:15:16 PM CET
 """
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from app import db
 from app.forms.edit_static import EditStaticForm
-from apps.models.page import Static
+from app.models.pages import Static
 
 bp = Blueprint('staticpage',__name__)
 
 
-@bp.route('/static/edit', methods=['GET', 'POST'])
+@bp.route('/godparent/static/edit', methods=['GET', 'POST'])
 @login_required
 def edit_static(page_type):
     """Edit an existing page type"""
