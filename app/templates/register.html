@@ -1,37 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Register</h1>
-    <form action="" method="post">
+
+<div class="post">
+    <h1 class="ui header">Register</h1>
+    <form action="" class="ui form" method="post">
         {{ form.hidden_tag() }}
         <p>
-            {{ form.email.label }} <br/>
-            {{ form.email(size=64) }} <br/>
+            {{ form.email.label }} <br />
+            {{ form.email(size=64) }} <br />
             {% for error in form.email.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.nickname.label }} <br/>
-            {{ form.nickname(size=32) }} <br/>
+            {{ form.nickname.label }} <br />
+            {{ form.nickname(size=32) }} <br />
             {% for error in form.nickname.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.password.label }} <br/>
-            {{ form.password(size=32) }} <br/>
+            {{ form.password.label }} <br />
+            {{ form.password(size=32) }} <br />
             {% for error in form.password.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.repeat_password.label }} <br/>
-            {{ form.repeat_password(size=32) }} <br/>
+            {{ form.repeat_password.label }} <br />
+            {{ form.repeat_password(size=32) }} <br />
             {% for error in form.repeat_password.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p> 
-        <p>{{ form.submit() }}</p>
+        </p>
+        <p><input id="submit" name="submit" type="submit" class="ui button primary"></p>
     </form>
+</div>
 {% endblock %}
