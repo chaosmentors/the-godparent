@@ -20,7 +20,7 @@
 </nav>
 <section class="sidenav">
     {% if current_user.is_godmother %}
-        {{macros.build_site_navigation(pages=pages, selected=page_name)}}
+    {{macros.build_site_navigation(pages=pages, selected=page_name)}}
     {% endif %}
 </section>
 <section class="content">
@@ -28,17 +28,29 @@
         {% block header %}{% endblock %}
     </header>
     {% if current_user.is_godmother %}
-        {% for message in get_flashed_messages() %}
-          <div class="flash">{{ message }}</div>
-        {% endfor %}
-        {% block content %}{% endblock %}
+    {% for message in get_flashed_messages() %}
+    <div class="ui icon message">
+        <i class="exclamation circle red icon"></i>
+        <i class="close icon"></i>
+        <div class="header">{{ message }}</div>
+    </div>
+    {% endfor %}
+    {% block content %}{% endblock %}
     {% else %}
-        <div class="content">
-            <p>
-                You can only access these pages as a godparent.
-            <p>
-        </div>
+    <div class="content">
+        <p>
+            You can only access these pages as a godparent.
+        <p>
+    </div>
     {% endif %}
 </section>
-
-
+<script>
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade')
+                ;
+        })
+        ;
+</script>

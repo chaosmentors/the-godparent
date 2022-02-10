@@ -40,10 +40,24 @@
       {% block header %}{% endblock %}
     </header>
     {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
+    <div class="ui icon message">
+      <i class="exclamation circle red icon"></i>
+      <i class="close icon"></i>
+      <div class="header">{{ message }}</div>
+    </div>
     {% endfor %}
     {% block content %}{% endblock %}
   </section>
+  <script>
+    $('.message .close')
+      .on('click', function () {
+        $(this)
+          .closest('.message')
+          .transition('fade')
+          ;
+      })
+      ;
+  </script>
 </body>
 
 </html>
