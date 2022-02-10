@@ -1,6 +1,7 @@
 """Database models for static pages"""
 from app import db
 
+PageTypeDescriptions = ["Welcome", "Imprint", "Privacy Statement"]
 
 class Static(db.Model):
     """Represents a static page in the database."""
