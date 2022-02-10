@@ -14,6 +14,9 @@ def generate_page_list():
     }, {
         'name': 'Languages',
         'url': url_for('language.list')
+    },{
+        'name': 'Static Pages',
+        'url': 'static'
     }]
 
     return pages

@@ -1,6 +1,6 @@
 """Defines the routes for static page editing.
    Created On: Sun 07 Nov 2021 03:31:00 PM CET
-   Last Modified: Thu 10 Feb 2022 08:47:52 PM CET
+   Last Modified: Thu 10 Feb 2022 08:59:03 PM CET
 """
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
@@ -47,4 +47,5 @@ def edit_static(page_type, lang_id):
         form.description.data = static.description
         return render_template('edit_staticpage.html', user=current_user,
                                form=form,
-                               page_type=PageTypeDescriptions[int(page_type)])
+                               page_type=PageTypeDescriptions[int(page_type)],
+                               page_name='Static Pages')

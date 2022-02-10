@@ -1,6 +1,6 @@
 """Defines the routes for adding and editing the supported languages.
    Created On: Sat 24 Jul 2021 09:01:05 PM CEST
-   Last Modified: Thu 23 Sep 2021 08:37:19 PM CEST
+   Last Modified: Thu 10 Feb 2022 08:53:57 PM CET
 """
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
@@ -31,7 +31,8 @@ def add():
             return render_template('edit_language.html',
                                    user=current_user,
                                    form=form,
-                                   new=True)
+                                   new=True,
+                                   page_name='Languages')
         lang = Language()
         lang.iso_code = form.iso_code.data
         lang.name = form.name.data
@@ -42,7 +43,8 @@ def add():
         return render_template('edit_language.html',
                                user=current_user,
                                form=form,
-                               new=True)
+                               new=True,
+                               page_name='Languages')
 
 
 @bp.route('/godparent/language/delete/<iso_code>', methods=['GET'])
@@ -90,7 +92,8 @@ def edit(iso_code):
         return render_template('edit_language.html',
                                user=current_user,
                                form=form,
-                               new=False)
+                               new=False,
+                               page_name='Languages')
 
 
 @bp.route('/godparent/languages', methods=['GET'])
