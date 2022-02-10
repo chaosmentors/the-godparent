@@ -133,3 +133,11 @@ dmypy.json
 
 # Swapfile from kate
 *.swp
+
+# VSCode
+.vscode
+
+# Personal files
+start.sh
+smurf.png
+
