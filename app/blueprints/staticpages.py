@@ -6,7 +6,7 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from app import db
-from app.forms.edit_static import EditStaticForm
+from app.forms.static import EditStaticForm, create_static_table
 from app.models.pages import PageTypeDescriptions, Static
 
 bp = Blueprint('staticpage',__name__)
@@ -14,7 +14,7 @@ bp = Blueprint('staticpage',__name__)
 
 @bp.route('/godparent/static/edit/<page_type>/<lang_id>', methods=['GET', 'POST'])
 @login_required
-def edit_static(page_type, lang_id):
+def edit(page_type, lang_id):
     """Edit an existing page type"""
     if not current_user.is_authenticated:
         return redirect(url_for('auth.login'))
@@ -49,3 +49,22 @@ def edit_static(page_type, lang_id):
                                form=form,
                                page_type=PageTypeDescriptions[int(page_type)],
                                page_name='Static Pages')
+
+@bp.route('godparent/static')
+@login_required
+def list():
+    """ Show the existing static page types """
+    if not current_user.is_authenticated:
+        return redirect(url_for('auth.login'))
+    if not current_user.is_godmother:
+        flash('Only godparents can use this function.')
+        redirect(url_for('index'))
+
+    results = PageTypeDescriptions
+    TableCls = create_static_table()
+    table = TableCls(results)
+    pages = generate_page_list()
+    return render_template('staticpages.html',
+                           table=table,
+                           pages=pages,
+                           page_name='Static Pages')
