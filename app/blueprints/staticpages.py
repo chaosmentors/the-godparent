@@ -50,7 +50,7 @@ def edit(page_type, lang_id):
                                page_type=PageTypeDescriptions[int(page_type)],
                                page_name='Static Pages')
 
-@bp.route('godparent/static')
+@bp.route('/godparent/static')
 @login_required
 def list():
     """ Show the existing static page types """

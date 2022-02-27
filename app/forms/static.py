@@ -22,6 +22,5 @@ def create_static_table():
     table = create_table('TableCls').add_column('page_type',Col('Page Type'))
     for lang in languages:
         table.add_column(lang.iso_code, LinkCol(lang.iso_code, 'staticpages.edit',
-                                                url_kwargs=dict(page_type='page_type',iso_code='iso_code'))
-
+                                                url_kwargs=dict(page_type='page_type',iso_code='iso_code')))
     return table
