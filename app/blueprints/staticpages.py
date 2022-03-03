@@ -7,7 +7,8 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from app import db
 from app.forms.static import EditStaticForm, create_static_table
-from app.models.pages import PageTypeDescriptions, Static
+from app.models.pages import Static
+from app.sidebar import generate_page_list
 
 bp = Blueprint('staticpage',__name__)
 
@@ -60,9 +61,7 @@ def list():
         flash('Only godparents can use this function.')
         redirect(url_for('index'))
 
-    results = PageTypeDescriptions
-    TableCls = create_static_table()
-    table = TableCls(results)
+    table = create_static_table()
     pages = generate_page_list()
     return render_template('staticpages.html',
                            table=table,
