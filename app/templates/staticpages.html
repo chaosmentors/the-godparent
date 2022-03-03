@@ -6,6 +6,26 @@
 
 {% block content %}
     <p>
-        {{ table }}
+        <table id="data" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Page Type</th>
+                    <th>Language</th>
+                    <th>Edit Page</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for page_type in page_types %}
+                <tr>
+                    <form action="" method="post">
+                        {{ form.hidden_tag() }}
+                        <td>{{ page_type }}</td>
+                        <td>{{ form.language }}</td>
+                        <td>{{ form.submit }}</td>
+                    </form>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </p>
 {% endblock %}

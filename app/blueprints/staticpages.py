@@ -6,8 +6,9 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from app import db
-from app.forms.static import EditStaticForm, create_static_table
-from app.models.pages import Static
+from app.models.languages import Language
+from app.forms.static import EditStaticForm, ShowStaticForm
+from app.models.pages import PageTypeDescriptions, Static
 from app.sidebar import generate_page_list
 
 bp = Blueprint('staticpage',__name__)
@@ -51,7 +52,7 @@ def edit(page_type, lang_id):
                                page_type=PageTypeDescriptions[int(page_type)],
                                page_name='Static Pages')
 
-@bp.route('/godparent/static')
+@bp.route('/godparent/static', methods=['GET', 'POST'])
 @login_required
 def list():
     """ Show the existing static page types """
@@ -61,9 +62,17 @@ def list():
         flash('Only godparents can use this function.')
         redirect(url_for('index'))
 
-    table = create_static_table()
-    pages = generate_page_list()
-    return render_template('staticpages.html',
-                           table=table,
-                           pages=pages,
-                           page_name='Static Pages')
+    form = ShowStaticForm()
+    languages = Language.query.order_by(Language.iso_code).all()
+    form.language.choices = [(i.iso_code, i.name) for i in languages]
+    if form.validate_on_submit():
+        # TODO: redirect to the edit page.
+        name = form
+    elif request.method == 'GET':
+        # TODO: Find a way to find out which edit button was clicked.
+        pages = generate_page_list()
+        return render_template('staticpages.html',
+                            form=form,
+                            page_types = PageTypeDescriptions,
+                            pages=pages,
+                            page_name='Static Pages')
