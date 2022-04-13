@@ -5,9 +5,10 @@ body{
 }
 
 .content{
-    margin-top: 80px;
+    margin-top: 180px;
     padding-left: 10px;
     padding-right: 10px;
+    border: 5px solid black;
 }
 
 .post{
@@ -33,3 +34,4 @@ body{
     flex-direction: column;
     align-items: center;
 }
+
