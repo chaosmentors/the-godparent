@@ -5,11 +5,15 @@
 {% endblock %}
 
 {% block content %}
-    <p>
-    <a href="{{ url_for('language.add') }}">Add new</a>
-    </p>
-
+<div class="post">
+    <h4>Languages</h4>
     <p>
         {{ table }}
     </p>
+    <a href="{{ url_for('language.add') }}">
+        <p class="ui green button">
+            Add new
+        </p>
+    </a>
+</div>
 {% endblock %}
