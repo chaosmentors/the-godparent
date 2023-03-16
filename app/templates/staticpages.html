@@ -15,11 +15,11 @@
                 </tr>
             </thead>
             <tbody>
-            {% for page_type in page_types %}
+            {% for static_page in static_pages %}
                 <tr>
                     <form action="" method="post">
                         {{ form.hidden_tag() }}
-                        <td>{{ page_type }}</td>
+                        <td>{{ static_page.type }}</td>
                         <td>{{ form.language }}</td>
                         <td>{{ form.submit }}</td>
                     </form>

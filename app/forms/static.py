@@ -4,7 +4,7 @@
 """
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField, TextAreaField
+from wtforms import StringField, SelectField, SubmitField, TextAreaField, HiddenField
 from wtforms.validators import DataRequired
 from app.models.languages import Language
 from app.models.pages import PageTypeDescriptions
@@ -18,6 +18,7 @@ class EditStaticForm(FlaskForm):
 
 class ShowStaticForm(FlaskForm):
     """ Show a list of static for editing """
+    id = HiddenField()
     page_type = StringField('Page Type')
     language = SelectField('Language', validators=[DataRequired()])
     submit = SubmitField('Edit')

@@ -1,6 +1,6 @@
 """Defines the routes for static page editing.
    Created On: Sun 07 Nov 2021 03:31:00 PM CET
-   Last Modified: Thu 10 Feb 2022 08:59:03 PM CET
+   Last Modified: Thu 16 Mar 2023 09:29:40 pm CET
 """
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
@@ -35,7 +35,7 @@ def edit(page_type, lang_id):
             static.content = form.content.data
             static.description = form.description.data
         db.session.commit()        
-        return redirect(url_for(staticpages.list))
+        return redirect(url_for('staticpage.list'))
     elif request.method == 'GET':
         static = Static.query.filter((Static.type == page_type) and
                                      (Static.language_id == lang_id))
@@ -67,12 +67,30 @@ def list():
     form.language.choices = [(i.iso_code, i.name) for i in languages]
     if form.validate_on_submit():
         # TODO: redirect to the edit page.
-        name = form
+        current_id = request.form["id"]
+        static = Static.query.filter(Static.id == current_id).first() 
+        if not static:
+            static = Static()
+            static.language = request.form["language"]
+            static.type = PageTypeDescriptions[0]
+            static.content = ''
+            static.description = ''
+        form.content.data = static.content
+        form.description.data = static.description
+        return render_template('edit_staticpage.html', user=current_user,
+                               form=form,
+                               page_type=PageTypeDescriptions[int(static.type)],
+                               page_name='Static Pages')
     elif request.method == 'GET':
         # TODO: Find a way to find out which edit button was clicked.
         pages = generate_page_list()
+        static_pages = Static.query.all()
+        if not static_pages:
+            for index, page_type in enumerate(PageTypeDescriptions):
+                static = Static()
+                static.type = index
         return render_template('staticpages.html',
                             form=form,
-                            page_types = PageTypeDescriptions,
+                            static_pages = static_pages,
                             pages=pages,
                             page_name='Static Pages')
